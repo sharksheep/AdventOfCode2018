@@ -85,7 +85,7 @@ public class DayTwoInventory extends FileReadContext{
         int values = idBox.getBoxIdsChecksumFromFile();
         System.out.println("the values is :" + values);
         long costTimes = System.nanoTime() - startTimes;
-        System.out.println("Cost time is:" + costTimes + " ms");
+        System.out.println("Cost time is:" + costTimes + " ns");
         
     }
 

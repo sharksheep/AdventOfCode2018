@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class DayTwoPartTwo extends FileReadContext {
 
@@ -117,13 +118,46 @@ public class DayTwoPartTwo extends FileReadContext {
         
     }
 
+    /**
+     * hash find the same one, the higher than V2 method.
+     */
+    public void compareStringV3(ArrayList<String> strings) {
+        int length = strings.get(0).length();
+        int size = strings.size();
+        HashSet<String> valueSet = new HashSet<>();
+        int index = 0;
+        for (int i = 0; i < length; i++) {
+            index = i;
+            for (int j = 0; j < size; j++) {
+                String firstString = strings.get(j);
+                String preString = firstString.substring(0, index);
+                String endString = firstString.substring(index + 1);
+                System.out.println("\t"+preString + "\t" + endString);
+                String hashString = preString + endString;
+                if (valueSet.contains(hashString)) {
+                    stringValue = hashString;
+                    stringPosition = index;
+                    diffs[0] = firstString.charAt(index);
+                    // diffs[1] = secondString.charAt(index);
+                    return;
+                } else {
+                    valueSet.add(hashString);
+                }
+            }
+        }
+        
+    }
+
     @Override
     public void doFileLogic() throws IOException {
         //Must call
         super.doFileLogic();
         //Cost much more time
         // compareString(stringList);
-        compareStringV2(stringList);
+        // much better than V1
+        // compareStringV2(stringList);
+        // now the best
+        compareStringV3(stringList);
     }
 
     public static void main(String[] args) {
@@ -137,7 +171,7 @@ public class DayTwoPartTwo extends FileReadContext {
             System.out.println("String line first is:" + similarStringBox.lineFirst);
             System.out.println("String line second is:" + similarStringBox.lineSecond);
             long costTimes = System.nanoTime() - startTimes;
-            System.out.println("Cost time is:" + costTimes + " ms");
+            System.out.println("Cost time is:" + costTimes + " ns");
         } catch (IOException e) {
             e.printStackTrace();
         }
