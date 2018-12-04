@@ -1,7 +1,9 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Calendar;
 import java.io.File;
+import java.util.Date;
 
 public abstract class FileReadContext {
 
@@ -40,6 +42,16 @@ public abstract class FileReadContext {
 
     public void doFileLogic() throws IOException {
         readFileContent();
+    }
+
+    public int getMinute(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        return calendar.get(Calendar.MINUTE);
+    }
+
+    public int getMinute(long timeMills) {
+        return getMinute(new Date(timeMills));
     }
 
 }
