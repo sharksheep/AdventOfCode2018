@@ -27,12 +27,27 @@ public abstract class FileReadContext {
     private void readFileContent() throws IOException{
         FileReader fReader = new FileReader(getPuzzleFile());
         BufferedReader bufferedReader = new BufferedReader(fReader);
-        String line = null;
-        while((line = bufferedReader.readLine()) != null) {
-            readPuzzleLine(line);
+        if (isReadLine()) {
+            String line = null;
+            while((line = bufferedReader.readLine()) != null) {
+                readPuzzleLine(line);
+            }
+        } else {
+            int var = -1;
+            while((var = bufferedReader.read()) != -1 ) {
+                readChar(var);
+            }
         }
         bufferedReader.close();
         fReader.close();
+    }
+
+    protected boolean isReadLine() {
+        return true;
+    }
+
+    public void readChar(int charsequence) {
+        //nothing to do
     }
 
     /**
