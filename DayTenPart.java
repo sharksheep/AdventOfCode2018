@@ -104,7 +104,7 @@ public class DayTenPart extends FileReadContext {
     }
 
     public void resolve1() {
-        int max = 10695;//Integer.MAX_VALUE;
+        int max = Integer.MAX_VALUE;
         for (int i = 1; i < max; i++) {
             // System.out.println(i);
             for (Point var : dataList) {
